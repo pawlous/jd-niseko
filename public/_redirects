@@ -1,0 +1,9 @@
+# 301 redirects to inherit the old Chinese site's SEO.
+# Format: <old-path>  <new-path>  <status>
+# Fill these in by mapping the old site's URLs to the new ones.
+# Example:
+# /course/private        /lessons              301
+# /en/course/private     /en/lessons           301
+#
+# Keep the most-trafficked old pages mapped — check the old site's analytics
+# or Google Search Console for which URLs actually have inbound links/traffic.

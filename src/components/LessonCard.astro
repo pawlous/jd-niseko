@@ -1,0 +1,64 @@
+---
+import { useTranslations, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  summary: string;
+  priceFrom: string;
+  priceNote?: string;
+  durationLabel: string;
+  roombossUrl: string;
+  tradeEnquiryOnly: boolean;
+  image?: string;
+}
+const {
+  locale, title, summary, priceFrom, priceNote,
+  durationLabel, roombossUrl, tradeEnquiryOnly, image,
+} = Astro.props;
+const t = useTranslations(locale);
+---
+
+<article class="card">
+  {image && <img src={image} alt={title} loading="lazy" />}
+  <div class="card-body">
+    <h3>{title}</h3>
+    <p class="summary">{summary}</p>
+    <div class="meta">
+      <span class="price">{t('lessons.priceFrom')} <strong>{priceFrom}</strong></span>
+      {priceNote && <span class="note">{priceNote}</span>}
+    </div>
+    <p class="duration">{t('lessons.duration')}: {durationLabel}</p>
+
+    {tradeEnquiryOnly ? (
+      <a class="btn btn-trade" href={`/contact?lesson=${encodeURIComponent(title)}`}>
+        {t('lessons.tradeEnquiry')}
+      </a>
+    ) : (
+      <!-- THE HANDOFF: target=_blank so visitors keep our tab open while they
+           book on RoomBoss. rel=noopener for security. This is the single
+           integration point on the whole site. -->
+      <a class="btn btn-book" href={roombossUrl} target="_blank" rel="noopener noreferrer">
+        {t('lessons.book')}
+      </a>
+    )}
+    <p class="book-note">{t('lessons.bookNote')}</p>
+  </div>
+</article>
+
+<style>
+  .card { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .card img { width: 100%; height: 180px; object-fit: cover; }
+  .card-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+  h3 { margin: 0; font-size: 1.1rem; }
+  .summary { color: var(--muted); margin: 0; flex: 1; }
+  .meta { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+  .price strong { font-size: 1.2rem; color: var(--ink); }
+  .note { color: var(--muted); font-size: 0.85rem; }
+  .duration { color: var(--muted); font-size: 0.9rem; margin: 0; }
+  .btn { display: inline-block; text-align: center; padding: 0.7rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 0.5rem; }
+  .btn-book { background: var(--accent); color: white; }
+  .btn-book:hover { filter: brightness(0.95); }
+  .btn-trade { background: var(--ink); color: white; }
+  .book-note { font-size: 0.75rem; color: var(--muted); margin: 0.25rem 0 0; text-align: center; }
+</style>

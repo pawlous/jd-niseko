@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import { useTranslations } from '../../i18n/utils';
+const locale = 'en' as const;
+const t = useTranslations(locale);
+---
+<Base locale={locale} title="JD Niseko Ski & Snowboard School" description={t('hero.subtitle')}>
+  <section class="hero">
+    <h1>{t('hero.tagline')}</h1>
+    <p>{t('hero.subtitle')}</p>
+    <a class="cta" href="/en/lessons">{t('nav.lessons')}</a>
+  </section>
+  <style>
+    .hero { text-align: center; padding: 3rem 0; }
+    .hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .hero p { color: var(--muted); font-size: 1.1rem; }
+    .cta { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: white; padding: 0.8rem 1.6rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
+  </style>
+</Base>

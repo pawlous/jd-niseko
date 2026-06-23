@@ -1,0 +1,79 @@
+---
+import { useTranslations, localizedPath, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description?: string;
+}
+const { locale, title, description } = Astro.props;
+const t = useTranslations(locale);
+const otherLocale: Locale = locale === 'zh' ? 'en' : 'zh';
+const htmlLang = locale === 'zh' ? 'zh-Hant' : 'en';
+---
+
+<!doctype html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <!-- hreflang tells Google the zh/en pages are the same content in two
+         languages. Important for the SEO migration from the old site. -->
+    <link rel="alternate" hreflang="zh-Hant" href={new URL(localizedPath('zh', Astro.url.pathname.replace(/^\/en/, '') || '/'), Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(localizedPath('en', Astro.url.pathname.replace(/^\/en/, '') || '/'), Astro.site)} />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={localizedPath(locale, '/')}>JD Niseko</a>
+      <nav>
+        <a href={localizedPath(locale, '/')}>{t('nav.home')}</a>
+        <a href={localizedPath(locale, '/lessons')}>{t('nav.lessons')}</a>
+        <a href={localizedPath(locale, '/about')}>{t('nav.about')}</a>
+        <a href={localizedPath(locale, '/contact')}>{t('nav.contact')}</a>
+      </nav>
+      <!-- Language switch keeps the user on the same page in the other locale -->
+      <a class="lang-switch" href={localizedPath(otherLocale, Astro.url.pathname.replace(/^\/en/, '') || '/')}>
+        {t('lang.switch')}
+      </a>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <p>{t('footer.certified')}</p>
+      <p>&copy; {new Date().getFullYear()} JD Ski Snowboard School</p>
+    </footer>
+
+    <style>
+      :root {
+        --ink: #0f172a;
+        --accent: #0ea5e9;
+        --bg: #ffffff;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; color: var(--ink); background: var(--bg); line-height: 1.6; }
+      .site-header {
+        display: flex; align-items: center; gap: 1.5rem;
+        padding: 1rem 1.5rem; border-bottom: 1px solid var(--line);
+        position: sticky; top: 0; background: var(--bg); z-index: 10;
+      }
+      .brand { font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--ink); }
+      nav { display: flex; gap: 1.25rem; margin-right: auto; }
+      nav a, .lang-switch { text-decoration: none; color: var(--muted); }
+      nav a:hover { color: var(--accent); }
+      .lang-switch { font-weight: 600; color: var(--accent); }
+      main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+      .site-footer {
+        border-top: 1px solid var(--line); padding: 2rem 1.5rem;
+        color: var(--muted); font-size: 0.9rem; text-align: center;
+      }
+    </style>
+  </body>
+</html>

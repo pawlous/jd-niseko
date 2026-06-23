@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import LessonCard from '../components/LessonCard.astro';
+import { useTranslations } from '../i18n/utils';
+import { getCollection } from 'astro:content';
+
+const locale = 'zh' as const;
+const t = useTranslations(locale);
+
+// Pull only zh lessons (files under content/lessons/zh/), sorted by `order`.
+const lessons = (await getCollection('lessons', ({ id }) => id.startsWith('zh/')))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<Base locale={locale} title={`${t('lessons.heading')} | JD Niseko`}>
+  <h1>{t('lessons.heading')}</h1>
+  <div class="grid">
+    {lessons.map((lesson) => (
+      <LessonCard locale={locale} {...lesson.data} />
+    ))}
+  </div>
+  <style>
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+  </style>
+</Base>
