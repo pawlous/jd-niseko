@@ -8,7 +8,7 @@ interface Props {
   priceFrom: string;
   priceNote?: string;
   durationLabel: string;
-  roombossUrl: string;
+  roombossUrl?: string;
   tradeEnquiryOnly: boolean;
   image?: string;
 }
@@ -30,7 +30,7 @@ const t = useTranslations(locale);
     </div>
     <p class="duration">{t('lessons.duration')}: {durationLabel}</p>
 
-    {tradeEnquiryOnly ? (
+    {tradeEnquiryOnly || !roombossUrl ? (
       <a class="btn btn-trade" href={`/contact?lesson=${encodeURIComponent(title)}`}>
         {t('lessons.tradeEnquiry')}
       </a>

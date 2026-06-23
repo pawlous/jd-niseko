@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const locale = 'en' as const;
+const t = useTranslations(locale);
+---
+<Base locale={locale} title={`${t('about.heading')} | JD Niseko`} description={t('about.body')}>
+  <h1>{t('about.heading')}</h1>
+  <p>{t('about.body')}</p>
+
+  <section>
+    <h2>{t('guide.mountain.heading')}</h2>
+    <p><strong>Niseko United</strong> {t('guide.mountain.niseko')}</p>
+    <p><strong>Rusutsu</strong> {t('guide.mountain.rusutsu')}</p>
+    <p><strong>Kiroro</strong> {t('guide.mountain.kiroro')}</p>
+  </section>
+
+  <section>
+    <h2>{t('guide.gear.heading')}</h2>
+    <p>{t('guide.gear.body')}</p>
+  </section>
+
+  <section>
+    <h2>{t('guide.family.heading')}</h2>
+    <p>{t('guide.family.body')}</p>
+  </section>
+
+  <style>
+    section { margin-top: 2rem; }
+  </style>
+</Base>

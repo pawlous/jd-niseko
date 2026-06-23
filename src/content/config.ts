@@ -21,7 +21,7 @@ const lessons = defineCollection({
     order: z.number().default(0), // controls display order on listing page
 
     // Categorisation
-    discipline: z.enum(['ski', 'snowboard', 'both']),
+    discipline: z.enum(['ski', 'snowboard', 'both', 'other']),
     season: z.enum(['winter', 'summer']).default('winter'),
     audience: z.enum(['private', 'group']).default('private'),
 
@@ -38,8 +38,10 @@ const lessons = defineCollection({
     availableTo: z.string().optional(),
 
     // THE HANDOFF. This is the only integration point in the whole site.
-    // Verify this link works on RoomBoss's side each season.
-    roombossUrl: z.string().url(),
+    // Verify this link works on RoomBoss's side each season. Optional because
+    // some lessons (VIP, SUP, cycling, CASI) are quote/contact-only and have
+    // no self-serve RoomBoss product yet.
+    roombossUrl: z.string().url().optional(),
 
     // B2B vs B2C: consumer bookings go straight to roombossUrl; agency/hotel
     // bookings often don't self-serve. If true, also show a "contact for
@@ -55,4 +57,19 @@ const lessons = defineCollection({
   }),
 });
 
-export const collections = { lessons };
+/**
+ * INSTRUCTORS — team bios shown on the "team" section of the homepage.
+ * One markdown file per instructor per locale, body = bio text.
+ */
+const instructors = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    role: z.string(), // e.g. "執行長" / "資深滑雪教練"
+    order: z.number().default(0),
+    photo: z.string().optional(), // path under /public/images/coaches/
+    certificates: z.array(z.string()).default([]), // e.g. ["CASI 2", "CSIA 1"]
+  }),
+});
+
+export const collections = { lessons, instructors };

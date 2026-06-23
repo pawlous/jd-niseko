@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import { useTranslations } from '../i18n/utils';
+
+const locale = 'zh' as const;
+const t = useTranslations(locale);
+const lesson = Astro.url.searchParams.get('lesson');
+---
+<Base locale={locale} title={`${t('contact.heading')} | JD Niseko`} description={t('contact.intro')}>
+  <h1>{t('contact.heading')}</h1>
+  <p>{t('contact.intro')}</p>
+  {lesson && <p class="lesson-context">關於行程：<strong>{lesson}</strong></p>}
+
+  <ul class="channels">
+    <li><strong>{t('contact.line')}：</strong> <a href="https://lin.ee/ICrn5WQ" target="_blank" rel="noopener noreferrer">@261syhux</a></li>
+    <li><strong>{t('contact.whatsapp')}：</strong> +81 70 4210 7275</li>
+    <li><strong>{t('contact.wechat')}：</strong> JDnisekosss</li>
+    <li><strong>{t('contact.email')}：</strong> <a href="mailto:bookings@jdnisekosss.com">bookings@jdnisekosss.com</a></li>
+    <li><strong>{t('contact.instagram')}：</strong> <a href="https://www.instagram.com/jdsssniseko/" target="_blank" rel="noopener noreferrer">@jdsssniseko</a></li>
+  </ul>
+
+  <section>
+    <h2>{t('contact.tradeAgent')}</h2>
+    <p>{t('contact.tradeNote')}</p>
+    <p><a href="mailto:business@jdnisekosss.com">business@jdnisekosss.com</a></p>
+  </section>
+
+  <style>
+    .channels { list-style: none; padding: 0; }
+    .channels li { padding: 0.4rem 0; border-bottom: 1px solid var(--line); }
+    .lesson-context { color: var(--muted); }
+    section { margin-top: 2rem; }
+  </style>
+</Base>
