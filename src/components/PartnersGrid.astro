@@ -11,8 +11,11 @@ import { partners } from '../data/partners';
 </div>
 
 <style>
-  .partners-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1.25rem; align-items: center; }
-  .partner { display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 10px; padding: 1rem; height: 80px; }
-  .partner img { max-width: 100%; max-height: 48px; object-fit: contain; }
-  .partner span { font-size: 0.85rem; color: var(--muted); text-align: center; }
+  .partners-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1.25rem;
+    align-items: center; background: var(--bg-panel); border-radius: 12px; padding: 1.5rem;
+  }
+  .partner { display: flex; align-items: center; justify-content: center; border-radius: 8px; padding: 1rem; height: 70px; }
+  .partner img { max-width: 100%; max-height: 44px; object-fit: contain; }
+  .partner span { font-size: 0.8rem; color: var(--ink-on-panel); text-align: center; }
 </style>

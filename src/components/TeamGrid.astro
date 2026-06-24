@@ -27,11 +27,14 @@ const instructors = (await getCollection('instructors', ({ id }) => id.startsWit
 </div>
 
 <style>
-  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
-  .person { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; text-align: center; padding-bottom: 1rem; }
-  .person img { width: 100%; height: 220px; object-fit: cover; }
-  .person h3 { margin: 0.75rem 0 0.1rem; }
-  .role { color: var(--muted); font-size: 0.9rem; margin: 0 0 0.5rem; }
-  .certs { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem; justify-content: center; padding: 0 1rem; margin: 0; }
-  .certs li { background: var(--line); color: var(--ink); font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 999px; }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.75rem; }
+  .person { text-align: center; }
+  .person img {
+    width: 140px; height: 140px; object-fit: cover; border-radius: 50%;
+    border: 3px solid var(--accent); margin: 0 auto;
+  }
+  .person h3 { margin: 0.75rem 0 0.1rem; color: var(--ink); }
+  .role { color: var(--accent); font-size: 0.85rem; margin: 0 0 0.5rem; }
+  .certs { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem; justify-content: center; padding: 0; margin: 0; }
+  .certs li { background: var(--line); color: var(--muted); font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 999px; }
 </style>

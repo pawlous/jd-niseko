@@ -61,22 +61,28 @@ const t = useTranslations(locale);
   </section>
 
   <style>
-    .hero { text-align: center; padding: 3rem 0; }
-    .hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    .hero .subtitle { color: var(--muted); font-size: 1.1rem; }
+    .hero {
+      width: 100vw; margin-left: calc(50% - 50vw); margin-top: -2rem;
+      background:
+        linear-gradient(180deg, rgba(9,34,52,0.5) 0%, rgba(9,34,52,0.92) 100%),
+        url('/images/hero/winter-banner-1.jpg') center/cover no-repeat;
+      text-align: center; padding: 5rem 1.5rem 3.5rem;
+    }
+    .hero h1 { font-size: 2.25rem; margin-bottom: 0.5rem; color: var(--ink); }
+    .hero .subtitle { color: var(--ink); font-size: 1.1rem; opacity: 0.9; }
     .hero .intro { max-width: 720px; margin: 1rem auto 0; color: var(--muted); }
-    .cta { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: white; padding: 0.8rem 1.6rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
+    .cta { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: var(--bg); padding: 0.8rem 1.6rem; border-radius: 3px; text-decoration: none; font-weight: 700; }
 
     .badges { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 2rem 0; }
     .badge { border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem; text-align: center; }
-    .badge h3 { margin: 0 0 0.5rem; font-size: 1rem; }
+    .badge h3 { margin: 0 0 0.5rem; font-size: 1rem; color: var(--accent); }
     .badge p { margin: 0; color: var(--muted); font-size: 0.85rem; }
 
     section { margin: 3rem 0; }
     section h2 { margin-bottom: 0.5rem; }
     .section-intro { color: var(--muted); margin-top: 0; }
 
-    .process ol { padding-left: 1.25rem; }
+    .process ol { padding-left: 1.25rem; color: var(--muted); }
     .lift-status ul { list-style: none; padding: 0; display: flex; gap: 1.5rem; flex-wrap: wrap; }
     .lift-status a { color: var(--accent); text-decoration: none; font-weight: 600; }
   </style>

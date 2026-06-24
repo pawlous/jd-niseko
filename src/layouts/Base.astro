@@ -19,6 +19,11 @@ const htmlLang = locale === 'zh' ? 'zh-Hant' : 'en';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <link rel="icon" type="image/svg+xml" href="/images/site/logo.svg" />
+    <!-- Nunito Sans is the old site's brand typeface. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet" />
     <!-- hreflang tells Google the zh/en pages are the same content in two
          languages. Important for the SEO migration from the old site. -->
     <link rel="alternate" hreflang="zh-Hant" href={new URL(localizedPath('zh', Astro.url.pathname.replace(/^\/en/, '') || '/'), Astro.site)} />
@@ -26,7 +31,10 @@ const htmlLang = locale === 'zh' ? 'zh-Hant' : 'en';
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href={localizedPath(locale, '/')}>JD Niseko</a>
+      <a class="brand" href={localizedPath(locale, '/')}>
+        <img src="/images/site/logo.svg" alt="JD Niseko" />
+        JD Snowdrift &amp; Summer Sports
+      </a>
       <nav>
         <a href={localizedPath(locale, '/')}>{t('nav.home')}</a>
         <a href={localizedPath(locale, '/lessons')}>{t('nav.lessons')}</a>
@@ -52,30 +60,41 @@ const htmlLang = locale === 'zh' ? 'zh-Hant' : 'en';
     </footer>
 
     <style>
+      /* Palette pulled directly from jdnisekosss.com's computed styles:
+         dark navy body (#092234), darker navy header (#001D2E), and a
+         gold accent (#C59D5F) used everywhere for headings/buttons/badges. */
       :root {
-        --ink: #0f172a;
-        --accent: #0ea5e9;
-        --bg: #ffffff;
-        --muted: #64748b;
-        --line: #e2e8f0;
-        font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+        --bg: #092234;
+        --bg-header: #001d2e;
+        --bg-card: #15293a;
+        --bg-panel: #324757;
+        --ink: #ffffff;
+        --ink-on-panel: #ffffff;
+        --accent: #c59d5f;
+        --muted: #8c9ca8;
+        --line: rgba(255, 255, 255, 0.12);
+        font-family: "Nunito Sans", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
       }
       * { box-sizing: border-box; }
       body { margin: 0; color: var(--ink); background: var(--bg); line-height: 1.6; }
       .site-header {
         display: flex; align-items: center; gap: 1.5rem;
         padding: 1rem 1.5rem; border-bottom: 1px solid var(--line);
-        position: sticky; top: 0; background: var(--bg); z-index: 10;
+        position: sticky; top: 0; background: var(--bg-header); z-index: 10;
       }
-      .brand { font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--ink); }
+      .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.1rem; text-decoration: none; color: var(--ink); }
+      .brand img { height: 32px; width: 32px; }
       nav { display: flex; gap: 1.25rem; margin-right: auto; }
       nav a, .lang-switch { text-decoration: none; color: var(--muted); }
       nav a:hover { color: var(--accent); }
       .lang-switch { font-weight: 600; color: var(--accent); }
       main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+      h1, h2, h3 { color: var(--accent); }
+      a { color: var(--accent); }
       .site-footer {
         border-top: 1px solid var(--line); padding: 2rem 1.5rem;
-        color: var(--muted); font-size: 0.9rem; text-align: center;
+        background: var(--bg-header);
+        color: var(--muted); font-size: 0.85rem; text-align: center;
       }
     </style>
   </body>
